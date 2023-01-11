@@ -1,7 +1,9 @@
 using CarRepairServiceCode.Filters;
 using CarRepairServiceCode.Helper;
 using CarRepairServiceCode.Helper.HelperInterfaces;
-using CarRepairServiceCode.Logging;
+using CarRepairServiceCode.RabbitMQServices.Interfaces;
+using CarRepairServiceCode.RabbitMQServices.RabbitConfig;
+using CarRepairServiceCode.RabbitMQServices.Senders;
 using CarRepairServiceCode.Repository.Contexts;
 using CarRepairServiceCode.Repository.Interfaces;
 using CarRepairServiceCode.Repository.Models;
@@ -21,18 +23,16 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Authorization;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Serilog;
 using System.Collections.Generic;
 using System.Text;
-using CarRepairServiceCode.RabbitMQServices.Interfaces;
-using CarRepairServiceCode.RabbitMQServices.RabbitConfig;
-using CarRepairServiceCode.RabbitMQServices.Senders;
-using Microsoft.EntityFrameworkCore;
 
 namespace CarRepairServiceCode
 {
@@ -165,6 +165,8 @@ namespace CarRepairServiceCode
 
             app.UseHttpsRedirection();
 
+            app.UseSerilogRequestLogging();
+
             app.UseRouting();
 
             app.UseAuthentication();
@@ -175,8 +177,6 @@ namespace CarRepairServiceCode
             {
                 endpoints.MapControllers();
             });
-
-            loggerFactory.AddFile(Constants.LoggerFilePath);
         }
     }
 }

@@ -1,4 +1,3 @@
-using CarRepairServiceCode.Accounting.Logging;
 using CarRepairServiceCode.Accounting.Mongo.Models;
 using CarRepairServiceCode.Accounting.RabbitMQServices;
 using CarRepairServiceCode.Accounting.RabbitMQServices.RabbitConfig;
@@ -11,6 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Serilog;
 
 namespace CarRepairServiceCode.Accounting
 {
@@ -52,6 +52,8 @@ namespace CarRepairServiceCode.Accounting
 
             app.UseHttpsRedirection();
 
+            app.UseSerilogRequestLogging();
+
             app.UseRouting();
 
             app.UseAuthorization();
@@ -60,8 +62,6 @@ namespace CarRepairServiceCode.Accounting
             {
                 endpoints.MapControllers();
             });
-
-            loggerFactory.AddFile("log.txt");
         }
     }
 }
