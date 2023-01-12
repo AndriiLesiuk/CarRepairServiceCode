@@ -56,22 +56,22 @@ namespace CarRepairServiceCode
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddTransient<IEmpPositionsService, EmpPositionsService>();
-            services.AddTransient<IEmpPositionRepository, EmployeePositionRepository>();
-            services.AddTransient<Services.ServiceInterfaces.IAuthorizationService, AuthorizationService>();
-            services.AddTransient<IAuthorizationRepository, AuthorizationRepository>();
-            services.AddTransient<ICarOrderService, CarOrderService>();
-            services.AddTransient<ICarOrderRepository, CarOrderRepository>();
-            services.AddTransient<ITaskCatalogService, TaskCatalogService>();
-            services.AddTransient<ITaskCatalogRepository, TaskCatalogRepository>();
-            services.AddTransient<IPermissionRepository, PermissionRepository>();
-            services.AddTransient<ITokenHelper, TokenHelper>();
-            services.AddTransient<IValidator<AuthRequest>, AuthValidator>();
-            services.AddTransient<IValidator<EmpPositionRequest>, EmpPositionValidator>();
-            services.AddTransient<IValidator<CarOrderRequest>, CarOrderValidator>();
-            services.AddTransient<IValidator<CarOrderDetailRequest>, CarOrderDetailsValidator>();
-            services.AddTransient<IValidator<TaskCatalogRequest>, TaskCatalogValidator>();
-            services.AddTransient<IAccountingInfoSender, AccountingInfoSender>();
+            services.AddScoped<IEmpPositionsService, EmpPositionsService>();
+            services.AddScoped<IEmpPositionRepository, EmployeePositionRepository>();
+            services.AddScoped<Services.ServiceInterfaces.IAuthorizationService, AuthorizationService>();
+            services.AddScoped<IAuthorizationRepository, AuthorizationRepository>();
+            services.AddScoped<ICarOrderService, CarOrderService>();
+            services.AddScoped<ICarOrderRepository, CarOrderRepository>();
+            services.AddScoped<ITaskCatalogService, TaskCatalogService>();
+            services.AddScoped<ITaskCatalogRepository, TaskCatalogRepository>();
+            services.AddScoped<IPermissionRepository, PermissionRepository>();
+            services.AddScoped<ITokenHelper, TokenHelper>();
+            services.AddScoped<IValidator<AuthRequest>, AuthValidator>();
+            services.AddScoped<IValidator<EmpPositionRequest>, EmpPositionValidator>();
+            services.AddScoped<IValidator<CarOrderRequest>, CarOrderValidator>();
+            services.AddScoped<IValidator<CarOrderDetailRequest>, CarOrderDetailsValidator>();
+            services.AddScoped<IValidator<TaskCatalogRequest>, TaskCatalogValidator>();
+            services.AddScoped<IAccountingInfoSender, AccountingInfoSender>();
 
             ConfigureServicesDb(services);
 
